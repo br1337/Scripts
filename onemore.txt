@@ -1,4 +1,3 @@
- 
 [ScriptBlock]$SocksConnectionMgr = {
     param($vars)
     $Script = {
